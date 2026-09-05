@@ -7,7 +7,7 @@ test.describe('E2E: Landing Page', () => {
     await page.goto(BASE_URL);
     await expect(page).toHaveTitle(/ProjectMentor AI/i);
 
-    const heading = page.locator('h1');
+    const heading = page.locator('h1').first();
     await expect(heading).toBeVisible();
 
     const startBtn = page.getByRole('link', { name: /Start Blueprint/i }).first();

@@ -53,7 +53,7 @@ test.describe('E2E: Project Architect AI Autonomous Flow', () => {
 
   test('returns 404 page for nonexistent routes with return home button', async ({ page }) => {
     await page.goto(`${BASE_URL}/invalid-route-slug-test`);
-    await expect(page.getByText(/Page Not Found|404/i)).toBeVisible();
+    await expect(page.getByText(/Page Not Found|404/i).first()).toBeVisible();
     const homeLink = page.getByRole('link', { name: /Return/i });
     if (await homeLink.isVisible()) {
       await expect(homeLink).toBeVisible();
