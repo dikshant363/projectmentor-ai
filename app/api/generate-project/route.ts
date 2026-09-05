@@ -24,7 +24,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const suite = await generateProjectSuiteWithGemini(profile as StudentProfile);
+    const normalizedProfile: StudentProfile = {
+      branch: profile.branch!,
+      interests: profile.interests || ['Computer Science & Engineering'],
+      currentSkills: profile.currentSkills || ['Full-Stack Development'],
+      experienceLevel: profile.experienceLevel || 'Intermediate',
+      preferredDomains: profile.preferredDomains && profile.preferredDomains.length > 0 ? profile.preferredDomains : (profile.interests || ['Software Engineering']),
+      availableMonths: profile.availableMonths || 4,
+      weeklyHours: profile.weeklyHours || 15,
+      careerGoal: profile.careerGoal || 'Placements',
+      preferredProjectScale: profile.preferredProjectScale || 'FullScale',
+      preferredPlatform: profile.preferredPlatform || 'Web',
+      likesResearch: profile.likesResearch ?? false,
+      likesDesign: profile.likesDesign ?? false,
+      likesBackend: profile.likesBackend ?? true,
+      likesAI: profile.likesAI ?? (profile.interests?.some(i => i.toLowerCase().includes('ai') || i.toLowerCase().includes('intelligence')) ?? false),
+    };
+
+    const suite = await generateProjectSuiteWithGemini(normalizedProfile);
 
     return NextResponse.json(suite, {
       status: 200,

@@ -157,7 +157,12 @@ Return ONLY a valid, parseable JSON object matching this exact TypeScript struct
       return generateMockProjectSuite(profile);
     }
 
-    const parsed: GeneratedProjectSuite = JSON.parse(rawText);
+    let cleanText = rawText.trim();
+    if (cleanText.startsWith('```')) {
+      cleanText = cleanText.replace(/^```(?:json)?\s*\n?/, '').replace(/\n?```\s*$/, '').trim();
+    }
+
+    const parsed: GeneratedProjectSuite = JSON.parse(cleanText);
     parsed.generatedAt = new Date().toISOString();
     parsed.isFallback = false;
     return parsed;

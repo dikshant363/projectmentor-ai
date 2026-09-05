@@ -1,9 +1,11 @@
 import { StudentProfile, GeneratedProjectSuite, ProjectIdea, Milestone } from '../types/index';
 
 export function generateMockProjectSuite(profile: StudentProfile): GeneratedProjectSuite {
-  const primaryDomain = profile.preferredDomains[0] || profile.interests[0] || 'Artificial Intelligence / LLMs';
-  const hasAI = profile.likesAI || primaryDomain.includes('AI') || profile.currentSkills.some(s => ['Python', 'PyTorch', 'TensorFlow'].includes(s));
-  const months = Math.min(Math.max(profile.availableMonths, 2), 8);
+  const preferred = Array.isArray(profile.preferredDomains) && profile.preferredDomains.length > 0 ? profile.preferredDomains : (profile.interests || []);
+  const primaryDomain = preferred[0] || 'Artificial Intelligence & Systems';
+  const skills = Array.isArray(profile.currentSkills) ? profile.currentSkills : ['Full-Stack'];
+  const hasAI = Boolean(profile.likesAI || primaryDomain.toLowerCase().includes('ai') || primaryDomain.toLowerCase().includes('intelligence') || skills.some(s => ['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn'].includes(s)));
+  const months = Math.min(Math.max(profile.availableMonths || 4, 2), 8);
   const totalWeeks = months * 4;
 
   // Generate 5 contextual project ideas tailored to their branch, skills and interests
@@ -19,12 +21,12 @@ export function generateMockProjectSuite(profile: StudentProfile): GeneratedProj
       targetAudience: hasAI ? 'Diagnostic centers, factory line operators, and autonomous monitoring units' : 'DevOps engineers, cloud platform teams, and high-availability API providers',
       matchScore: 98,
       confidenceScore: 94,
-      difficulty: profile.experienceLevel,
+      difficulty: profile.experienceLevel || 'Intermediate',
       estimatedDuration: `${months} Months (${months * 4} Weeks)`,
       resumeValue: 9.8,
       innovationScore: 9.2,
       practicalityScore: 9.5,
-      matchReason: `Directly matches your ${profile.branch} background, leveraging your experience with ${profile.currentSkills.slice(0, 3).join(', ')} while fitting your ${profile.weeklyHours} hrs/week target.`,
+      matchReason: `Directly matches your ${profile.branch} background, leveraging your experience with ${skills.slice(0, 3).join(', ')} while fitting your ${profile.weeklyHours || 15} hrs/week target.`,
       recommendedTech: hasAI 
         ? ['Python', 'FastAPI', 'PyTorch/ONNX', 'Next.js 15', 'Docker', 'PostgreSQL']
         : ['Go/TypeScript', 'Next.js 15', 'Node.js', 'Docker', 'PostgreSQL', 'Prometheus'],
@@ -49,7 +51,7 @@ export function generateMockProjectSuite(profile: StudentProfile): GeneratedProj
       resumeValue: 9.4,
       innovationScore: 8.8,
       practicalityScore: 9.6,
-      matchReason: `Capitalizes on your ${profile.careerGoal} target by demonstrating production-grade security, cryptographic hashing, and structured data extraction.`,
+      matchReason: `Capitalizes on your ${profile.careerGoal || 'engineering career'} target by demonstrating production-grade security, cryptographic hashing, and structured data extraction.`,
       recommendedTech: ['Next.js 15', 'Python/FastAPI', 'Tesseract/EasyOCR', 'PostgreSQL', 'Tailwind CSS'],
       coreFeatures: [
         'Multi-format OCR and tabular extraction with bounding box overlay',
@@ -95,7 +97,7 @@ export function generateMockProjectSuite(profile: StudentProfile): GeneratedProj
       resumeValue: 9.0,
       innovationScore: 8.4,
       practicalityScore: 9.7,
-      matchReason: `Extremely attractive to interviewers for ${profile.careerGoal} because it demonstrates your grasp of software engineering fundamentals and static analysis.`,
+      matchReason: `Extremely attractive to interviewers for ${profile.careerGoal || 'engineering roles'} because it demonstrates your grasp of software engineering fundamentals and static analysis.`,
       recommendedTech: ['TypeScript', 'Node.js', 'Next.js 15', 'Tailwind CSS', 'Tree-Sitter / Babel Parser'],
       coreFeatures: [
         'Abstract Syntax Tree (AST) parsing of multi-file repositories',
@@ -157,11 +159,11 @@ export function generateMockProjectSuite(profile: StudentProfile): GeneratedProj
         `Deliverable ${index + 1}.3: Milestone demo checkpoint for guide review`
       ],
       learningTopics: [
-        `${profile.currentSkills[0] || 'Modern Architecture'} Best Practices`,
+        `${skills[0] || 'Modern Architecture'} Best Practices`,
         'Modular System Design & Clean Separation',
         'Testing and Benchmarking Standards'
       ],
-      estimatedHours: profile.weeklyHours * (weekEnd - weekStart + 1),
+      estimatedHours: (profile.weeklyHours || 15) * (weekEnd - weekStart + 1),
       risks: index === 0 ? 'Scope creep if requirements are not bounded' : index === 2 ? 'Integration bugs between frontend and backend services' : 'Time compression before academic presentation deadline',
       successCriteria: `All milestone test cases execute green with documented deliverables in GitHub repository.`,
       completed: index === 0
@@ -170,11 +172,11 @@ export function generateMockProjectSuite(profile: StudentProfile): GeneratedProj
 
   return {
     profileAnalysis: {
-      studentSummary: `${profile.branch} candidate with ${profile.experienceLevel} proficiency in ${profile.currentSkills.slice(0, 4).join(', ')}. Target trajectory aligned with ${profile.careerGoal} with an allocation of ${profile.weeklyHours} hours weekly over ${profile.availableMonths} months.`,
+      studentSummary: `${profile.branch} candidate with ${profile.experienceLevel || 'Intermediate'} proficiency in ${skills.slice(0, 4).join(', ')}. Target trajectory aligned with ${profile.careerGoal || 'Software Engineering'} with an allocation of ${profile.weeklyHours || 15} hours weekly over ${profile.availableMonths || 4} months.`,
       inferredStrengths: [
-        `Proven foundation in ${profile.currentSkills.slice(0, 2).join(' and ')}`,
+        `Proven foundation in ${skills.slice(0, 2).join(' and ') || 'Core Technologies'}`,
         `Clear domain clarity towards ${primaryDomain}`,
-        `Realistic balance between ${profile.weeklyHours} hours/week commitment and final-year workload`
+        `Realistic balance between ${profile.weeklyHours || 15} hours/week commitment and final-year workload`
       ],
       feasibilityVerdict: 'Highly Feasible within academic semester timeline with structured modular deliverables.'
     },
@@ -346,7 +348,7 @@ export function generateMockProjectSuite(profile: StudentProfile): GeneratedProj
       ]
     },
     careerAlignment: {
-      track: profile.careerGoal,
+      track: profile.careerGoal || 'Software Engineering',
       score: 95,
       rationale: `This project directly demonstrates the exact competencies senior engineering interviewers probe: system trade-offs, defensive programming, clean architecture, and verifiable problem-solving.`,
       interviewTalkingPoints: [

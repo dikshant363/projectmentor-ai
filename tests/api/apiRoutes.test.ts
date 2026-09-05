@@ -40,6 +40,31 @@ describe('API Routes: Server-side Security & Handlers', () => {
     assert.ok(data.mentorReview);
   });
 
+  test('POST /api/generate-project: handles partial profile gracefully with normalized defaults', async () => {
+    const partialPayload = {
+      branch: 'Computer Science & Engineering',
+      interests: ['Artificial Intelligence / LLMs'],
+      currentSkills: ['Python', 'TypeScript'],
+      experienceLevel: 'Intermediate',
+      availableMonths: 4,
+      weeklyHours: 15,
+    };
+
+    const req = new NextRequest('http://localhost:3000/api/generate-project', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(partialPayload),
+    });
+
+    const res = await generateProjectHandler(req);
+    assert.strictEqual(res.status, 200);
+
+    const data = await res.json();
+    assert.ok(data.recommendedProjects);
+    assert.strictEqual(data.recommendedProjects.length, 5);
+    assert.strictEqual(data.profileAnalysis.studentSummary.includes('Computer Science & Engineering'), true);
+  });
+
   test('POST /api/generate-project: rejects malformed JSON with 400 Bad Request', async () => {
     const req = new NextRequest('http://localhost:3000/api/generate-project', {
       method: 'POST',
