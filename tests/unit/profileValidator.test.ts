@@ -1,5 +1,4 @@
-import { test, describe } from 'node:test';
-import assert from 'node:assert';
+import { describe, test, assert } from 'vitest';
 import {
   validateStudentProfile,
   sanitizeInputString,

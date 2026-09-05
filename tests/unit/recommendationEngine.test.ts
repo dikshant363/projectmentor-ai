@@ -1,5 +1,4 @@
-import { test, describe } from 'node:test';
-import assert from 'node:assert';
+import { describe, test, assert } from 'vitest';
 import { generateMockProjectSuite } from '../../lib/ai/mockDecisionEngine';
 import { StudentProfile } from '../../lib/types/index';
 

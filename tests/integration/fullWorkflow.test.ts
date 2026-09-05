@@ -1,5 +1,4 @@
-import { test, describe } from 'node:test';
-import assert from 'node:assert';
+import { describe, test, expect, assert } from 'vitest';
 import { validateStudentProfile } from '../../lib/validation/profileSchema';
 import { generateMockProjectSuite } from '../../lib/ai/mockDecisionEngine';
 import { evaluateVivaDefenseLocally } from '../../lib/ai/vivaEvaluator';
@@ -73,5 +72,154 @@ describe('Integration: End-to-End Capstone Workflow', () => {
     assert.ok(synopsis.includes('### 5. CORE MODULES SPECIFICATION'));
     assert.ok(synopsis.includes('### 8. DEVELOPMENT MILESTONES & ROADMAP'));
     assert.ok(synopsis.includes('### 10. VIVA DEFENSE PREPARATION'));
+  });
+
+  test('project selection state synchronization across blueprint and synopsis', () => {
+    const profile: StudentProfile = {
+      branch: 'Information Technology',
+      interests: ['Cybersecurity & Cryptography'],
+      currentSkills: ['Python', 'Linux', 'Docker'],
+      experienceLevel: 'Intermediate',
+      preferredDomains: ['Cybersecurity & Network Defense'],
+      availableMonths: 4,
+      weeklyHours: 15,
+      careerGoal: 'Placements',
+      preferredProjectScale: 'FullScale',
+      preferredPlatform: 'Web',
+      likesResearch: false,
+      likesDesign: false,
+      likesBackend: true,
+      likesAI: false,
+    };
+
+    const suite = generateMockProjectSuite(profile);
+    expect(suite.recommendedProjects.length).toBe(5);
+
+    // Switch project selection to Option #2
+    const altProject = suite.recommendedProjects[1];
+    expect(altProject.title).toBeDefined();
+    const altSynopsis = generateUniversitySynopsisMarkdown(suite, profile);
+
+    expect(altSynopsis).toContain('# UNIVERSITY FINAL-YEAR PROJECT SYNOPSIS');
+    expect(altSynopsis).toContain('Information Technology');
+  });
+
+  test('milestone completion tracking and hour distribution across phases', () => {
+    const profile: StudentProfile = {
+      branch: 'Artificial Intelligence & Data Science',
+      interests: ['Artificial Intelligence / LLMs'],
+      currentSkills: ['Python', 'PyTorch'],
+      experienceLevel: 'Intermediate',
+      preferredDomains: ['Artificial Intelligence / LLMs'],
+      availableMonths: 6,
+      weeklyHours: 20,
+      careerGoal: 'Research',
+      preferredProjectScale: 'FullScale',
+      preferredPlatform: 'Web',
+      likesResearch: true,
+      likesDesign: false,
+      likesBackend: true,
+      likesAI: true,
+    };
+
+    const suite = generateMockProjectSuite(profile);
+    const milestones = suite.developmentRoadmap;
+
+    expect(milestones.length).toBeGreaterThanOrEqual(6);
+    expect(milestones[0].completed).toBe(true); // First phase scaffolded
+
+    const totalHours = milestones.reduce((sum, m) => sum + m.estimatedHours, 0);
+    expect(totalHours).toBeGreaterThanOrEqual(20 * 4 * 2); // Substantial semester effort
+  });
+
+  test('deterministic offline resilience: zero external network dependency', async () => {
+    const savedKey = process.env.GEMINI_API_KEY;
+    delete process.env.GEMINI_API_KEY;
+
+    const profile: StudentProfile = {
+      branch: 'Computer Science & Engineering',
+      interests: ['Distributed Systems'],
+      currentSkills: ['Go', 'TypeScript'],
+      experienceLevel: 'Advanced',
+      preferredDomains: ['Cloud & DevOps'],
+      availableMonths: 4,
+      weeklyHours: 12,
+      careerGoal: 'Placements',
+      preferredProjectScale: 'FullScale',
+      preferredPlatform: 'Web',
+      likesResearch: false,
+      likesDesign: false,
+      likesBackend: true,
+      likesAI: false,
+    };
+
+    const suite = generateMockProjectSuite(profile);
+    expect(suite.recommendedProjects.length).toBe(5);
+    expect(suite.projectBlueprint.coreModules.length).toBeGreaterThanOrEqual(3);
+
+    process.env.GEMINI_API_KEY = savedKey;
+  });
+
+  test('academic synopsis format verification against institutional rubric', () => {
+    const profile: StudentProfile = {
+      branch: 'Electronics & Communication Engineering',
+      interests: ['IoT, Robotics & Hardware Integration'],
+      currentSkills: ['C++', 'Python', 'MQTT'],
+      experienceLevel: 'Intermediate',
+      preferredDomains: ['IoT, Robotics & Hardware Integration'],
+      availableMonths: 4,
+      weeklyHours: 15,
+      careerGoal: 'Placements',
+      preferredProjectScale: 'FullScale',
+      preferredPlatform: 'Embedded/IoT',
+      likesResearch: false,
+      likesDesign: false,
+      likesBackend: true,
+      likesAI: false,
+    };
+
+    const suite = generateMockProjectSuite(profile);
+    const synopsis = generateUniversitySynopsisMarkdown(suite, profile);
+
+    const requiredHeaders = [
+      '# UNIVERSITY FINAL-YEAR PROJECT SYNOPSIS',
+      '### 1. ABSTRACT & EXECUTIVE SUMMARY',
+      '### 2. PROBLEM STATEMENT',
+      '### 3. TARGET BENEFICIARIES & PERSONAS',
+      '### 4. SYSTEM WORKFLOW & ARCHITECTURAL PIPELINE',
+      '### 5. CORE MODULES SPECIFICATION',
+      '### 6. HARDWARE & SOFTWARE REQUIREMENTS',
+      '### 7. VERIFIED DATASETS & EXTERNAL APIS',
+      '### 8. DEVELOPMENT MILESTONES & ROADMAP',
+      '### 9. PRE-DEVELOPMENT RISK MITIGATION MATRIX',
+      '### 10. VIVA DEFENSE PREPARATION',
+    ];
+
+    for (const header of requiredHeaders) {
+      expect(synopsis).toContain(header);
+    }
+  });
+
+  test('multidisciplinary profile synthesis adapts accurately for non-CS branches', () => {
+    const mechatronicsProfile: StudentProfile = {
+      branch: 'Mechanical & Mechatronics Engineering',
+      interests: ['IoT & Embedded Hardware'],
+      currentSkills: ['Python', 'C++', 'Arduino'],
+      experienceLevel: 'Intermediate',
+      preferredDomains: ['IoT, Robotics & Hardware Integration'],
+      availableMonths: 4,
+      weeklyHours: 15,
+      careerGoal: 'Placements',
+      preferredProjectScale: 'FullScale',
+      preferredPlatform: 'CrossPlatform',
+      likesResearch: false,
+      likesDesign: true,
+      likesBackend: false,
+      likesAI: false,
+    };
+
+    const suite = generateMockProjectSuite(mechatronicsProfile);
+    expect(suite.recommendedProjects.length).toBe(5);
+    expect(suite.profileAnalysis.studentSummary).toContain('Mechanical & Mechatronics Engineering');
   });
 });

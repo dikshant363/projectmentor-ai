@@ -1,6 +1,5 @@
-import { test, describe } from 'node:test';
-import assert from 'node:assert';
-import { generateUniversitySynopsisMarkdown } from '../../lib/export/synopsisExporter';
+import { describe, test, expect, assert, vi } from 'vitest';
+import { generateUniversitySynopsisMarkdown, downloadFile } from '../../lib/export/synopsisExporter';
 import { generateMockProjectSuite } from '../../lib/ai/mockDecisionEngine';
 import { StudentProfile } from '../../lib/types/index';
 
@@ -42,5 +41,15 @@ describe('Unit: University Synopsis Exporter', () => {
 
     assert.ok(md.includes('| Week / Milestone | Phase Objective | Key Deliverables | Estimated Hours |'));
     assert.ok(md.includes('| Anticipated Engineering Risk | Severity | Mitigation Strategy |'));
+  });
+
+  test('executes downloadFile DOM sequence with mock URL methods', () => {
+    global.URL.createObjectURL = () => 'blob:mock-url';
+    global.URL.revokeObjectURL = () => {};
+    const clickSpy = vi.fn();
+    HTMLAnchorElement.prototype.click = clickSpy;
+
+    downloadFile('# Sample Synopsis', 'synopsis.md');
+    expect(clickSpy).toHaveBeenCalledTimes(1);
   });
 });
