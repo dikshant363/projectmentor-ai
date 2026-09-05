@@ -9,15 +9,11 @@ import {
   Layers,
   Cpu,
   Database,
-  Globe,
-  Lock,
   Workflow,
   FolderTree,
   FileCode2,
   Users,
   Compass,
-  CheckCircle2,
-  Sparkles,
   ExternalLink,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';

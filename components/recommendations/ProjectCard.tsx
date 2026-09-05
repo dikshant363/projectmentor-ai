@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, Star, Clock, Award, Zap } from 'lucide-react';
+import { ArrowRight, Clock, Award, Zap } from 'lucide-react';
 import { ProjectIdea } from '@/lib/types';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Sparkles, SlidersHorizontal, RefreshCw, ArrowRight, Compass, Layers } from 'lucide-react';
+import { RefreshCw, ArrowRight, Compass } from 'lucide-react';
 import { ProjectCard } from '@/components/recommendations/ProjectCard';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/ui/EmptyState';

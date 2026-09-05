@@ -12,7 +12,6 @@ import {
   ArrowRight,
   Compass,
   CheckSquare,
-  Sparkles,
   Download,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';

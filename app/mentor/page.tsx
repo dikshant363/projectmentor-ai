@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
   ShieldAlert,
@@ -14,7 +13,6 @@ import {
   Download,
   Briefcase,
   Layers,
-  ChevronDown,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';

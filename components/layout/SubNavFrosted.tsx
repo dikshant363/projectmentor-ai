@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowRight, Download, Sparkles, RefreshCw } from 'lucide-react';
+import { ArrowRight, Download, Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useProject } from '@/lib/context/ProjectContext';
 import { generateUniversitySynopsisMarkdown, downloadFile } from '@/lib/export/synopsisExporter';

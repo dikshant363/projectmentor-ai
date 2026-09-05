@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Cpu, Code2, Compass, Layers, Milestone, Terminal } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Layers, Milestone, Terminal } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';

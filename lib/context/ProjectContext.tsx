@@ -21,32 +21,45 @@ interface ProjectContextType {
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
 export function ProjectProvider({ children }: { children: React.ReactNode }) {
-  const [profile, setProfile] = useState<StudentProfile>(DEFAULT_STUDENT_PROFILE);
-  const [suite, setSuite] = useState<GeneratedProjectSuite | null>(null);
-  const [selectedProjectIndex, setSelectedProjectIndex] = useState<number>(0);
+  const [profile, setProfile] = useState<StudentProfile>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('projectmentor_profile');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {
+        console.warn('Could not read profile from storage:', e);
+      }
+    }
+    return DEFAULT_STUDENT_PROFILE;
+  });
+
+  const [suite, setSuite] = useState<GeneratedProjectSuite | null>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('projectmentor_suite');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {
+        console.warn('Could not read suite from storage:', e);
+      }
+    }
+    return null;
+  });
+
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('projectmentor_selected_idx');
+        if (saved) return parseInt(saved, 10);
+      } catch (e) {
+        console.warn('Could not read index from storage:', e);
+      }
+    }
+    return 0;
+  });
+
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
-  // Initialize from localStorage on mount (SSR safe)
-  useEffect(() => {
-    try {
-      const savedProfile = localStorage.getItem('projectmentor_profile');
-      if (savedProfile) {
-        setProfile(JSON.parse(savedProfile));
-      }
-      const savedSuite = localStorage.getItem('projectmentor_suite');
-      if (savedSuite) {
-        setSuite(JSON.parse(savedSuite));
-      }
-      const savedIndex = localStorage.getItem('projectmentor_selected_idx');
-      if (savedIndex) {
-        setSelectedProjectIndex(parseInt(savedIndex, 10));
-      }
-    } catch (e) {
-      console.warn('Could not restore state from localStorage:', e);
-    }
-  }, []);
-
-  // Sync to localStorage
+  // Sync to localStorage on state changes
   useEffect(() => {
     try {
       localStorage.setItem('projectmentor_profile', JSON.stringify(profile));
