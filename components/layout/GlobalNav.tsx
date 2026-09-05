@@ -1,15 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Compass, Menu, X, Sparkles, FolderGit2 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useProject } from '@/lib/context/ProjectContext';
 
+const emptySubscribe = () => () => {};
+
 export function GlobalNav() {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const { suite } = useProject();
 
   const navLinks = [
@@ -56,7 +59,7 @@ export function GlobalNav() {
 
         {/* Action / Project Indicator */}
         <div className="hidden md:flex items-center gap-3">
-          {suite ? (
+          {mounted && suite ? (
             <Link href="/blueprint">
               <span className="inline-flex items-center gap-1.5 text-[11px] bg-[#272729] text-[#2997ff] px-3 py-1 rounded-full border border-[#333333] hover:border-[#2997ff] transition-colors">
                 <FolderGit2 className="w-3 h-3" />

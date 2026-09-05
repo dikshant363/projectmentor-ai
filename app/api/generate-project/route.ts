@@ -5,7 +5,15 @@ import { generateProjectSuiteWithGemini } from '@/lib/ai/gemini';
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json(
+        { error: 'Malformed or invalid JSON payload' },
+        { status: 400 }
+      );
+    }
     const profile = body as Partial<StudentProfile>;
 
     const validation = validateStudentProfile(profile);

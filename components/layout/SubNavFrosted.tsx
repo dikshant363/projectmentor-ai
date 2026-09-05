@@ -47,7 +47,7 @@ export function SubNavFrosted() {
             {getSectionTitle()}
           </span>
           {suite && (
-            <span className="text-[12px] bg-white border border-[#e0e0e0] px-2.5 py-0.5 rounded-full text-[#7a7a7a] hidden lg:inline-block">
+            <span className="text-[12px] bg-white border border-[#e0e0e0] px-2.5 py-0.5 rounded-full text-[#555555] hidden lg:inline-block">
               {suite.recommendedProjects.length} ideas evaluated
             </span>
           )}

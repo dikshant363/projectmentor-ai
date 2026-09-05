@@ -25,7 +25,7 @@ export default function HomePage() {
             Think. Build. Defend.
           </h1>
 
-          <p className="font-lead text-[#7a7a7a] max-w-[700px] mb-10">
+          <p className="font-lead text-[#555555] max-w-[700px] mb-10">
             Your final-year engineering project, architected with clarity.
           </p>
 
@@ -43,7 +43,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <p className="text-[14px] text-[#7a7a7a] max-w-[540px] leading-relaxed">
+          <p className="text-[14px] text-[#555555] max-w-[540px] leading-relaxed">
             Not a generic chatbot. A specialized AI engineering mentor that analyses your branch, existing skills, and available hours to generate faculty-ready project proposals.
           </p>
         </div>
@@ -72,7 +72,7 @@ export default function HomePage() {
                 <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                 <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-                <span className="text-[12px] text-[#7a7a7a] font-mono ml-3">
+                <span className="text-[12px] text-[#a1a1a6] font-mono ml-3">
                   projectmentor_suite.json
                 </span>
               </div>
@@ -116,7 +116,7 @@ export default function HomePage() {
               {/* Metrics Column */}
               <div className="bg-[#252527] border border-[#333333] rounded-[11px] p-5 flex flex-col justify-between">
                 <div>
-                  <span className="text-[11px] uppercase tracking-wider text-[#7a7a7a] block mb-1">
+                  <span className="text-[11px] uppercase tracking-wider text-[#a1a1a6] block mb-1">
                     Evaluation Matrix
                   </span>
                   <div className="space-y-3 mt-3">
@@ -171,7 +171,7 @@ export default function HomePage() {
             <h2 className="font-display-lg text-[#1d1d1f] mb-4">
               How ProjectMentor AI guides your semester.
             </h2>
-            <p className="text-[17px] text-[#7a7a7a] leading-relaxed">
+            <p className="text-[17px] text-[#555555] leading-relaxed">
               Three deliberate stages to move from ambiguous ideas to an approved, fully planned engineering project.
             </p>
           </div>
@@ -186,7 +186,7 @@ export default function HomePage() {
                 <h3 className="font-tagline text-[#1d1d1f] mb-3">
                   Profile Your Arsenal
                 </h3>
-                <p className="text-[15px] text-[#7a7a7a] leading-relaxed mb-6">
+                <p className="text-[15px] text-[#555555] leading-relaxed mb-6">
                   Input your exact academic branch, real programming competencies, available weekly hours, and whether you target campus placements, research, or startups.
                 </p>
               </div>
@@ -205,7 +205,7 @@ export default function HomePage() {
                 <h3 className="font-tagline text-[#1d1d1f] mb-3">
                   5 Ranked Project Proposals
                 </h3>
-                <p className="text-[15px] text-[#7a7a7a] leading-relaxed mb-6">
+                <p className="text-[15px] text-[#555555] leading-relaxed mb-6">
                   The decision engine calculates Match Scores, feasibility ratios, and resume value for five distinct directions, filtering out unoriginal student clones.
                 </p>
               </div>
@@ -224,7 +224,7 @@ export default function HomePage() {
                 <h3 className="font-tagline text-[#1d1d1f] mb-3">
                   Defense & Roadmap Studio
                 </h3>
-                <p className="text-[15px] text-[#7a7a7a] leading-relaxed mb-6">
+                <p className="text-[15px] text-[#555555] leading-relaxed mb-6">
                   Unlock a complete architectural module breakdown, week-by-week milestone calendar, verified public datasets, and 5 tough questions external examiners will ask.
                 </p>
               </div>
@@ -247,7 +247,7 @@ export default function HomePage() {
             <h2 className="font-display-lg text-[#1d1d1f] mb-4">
               Everything your project coordinator demands.
             </h2>
-            <p className="text-[17px] text-[#7a7a7a] leading-relaxed">
+            <p className="text-[17px] text-[#555555] leading-relaxed">
               Designed according to university evaluation criteria to ensure your project passes scrutiny with distinction.
             </p>
           </div>
@@ -255,32 +255,32 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card variant="utility">
               <Layers className="w-6 h-6 text-[#0066cc] mb-4" />
-              <h4 className="font-body-strong text-[#1d1d1f] mb-2">Modular Architecture</h4>
-              <p className="text-[14px] text-[#7a7a7a] leading-relaxed">
+              <h3 className="font-body-strong text-[#1d1d1f] mb-2">Modular Architecture</h3>
+              <p className="text-[14px] text-[#555555] leading-relaxed">
                 Clear separation between UI client, computation services, and persistence layers to eliminate spaghetti code.
               </p>
             </Card>
 
             <Card variant="utility">
               <Milestone className="w-6 h-6 text-[#0066cc] mb-4" />
-              <h4 className="font-body-strong text-[#1d1d1f] mb-2">Paced Roadmap</h4>
-              <p className="text-[14px] text-[#7a7a7a] leading-relaxed">
+              <h3 className="font-body-strong text-[#1d1d1f] mb-2">Paced Roadmap</h3>
+              <p className="text-[14px] text-[#555555] leading-relaxed">
                 Chronological deliverables matched to your available semester months and weekly commitment.
               </p>
             </Card>
 
             <Card variant="utility">
               <ShieldCheck className="w-6 h-6 text-[#0066cc] mb-4" />
-              <h4 className="font-body-strong text-[#1d1d1f] mb-2">Viva Defense Prep</h4>
-              <p className="text-[14px] text-[#7a7a7a] leading-relaxed">
+              <h3 className="font-body-strong text-[#1d1d1f] mb-2">Viva Defense Prep</h3>
+              <p className="text-[14px] text-[#555555] leading-relaxed">
                 Anticipate examiner traps: trade-offs, scalability bottlenecks, latency profiles, and failure modes.
               </p>
             </Card>
 
             <Card variant="utility">
               <Terminal className="w-6 h-6 text-[#0066cc] mb-4" />
-              <h4 className="font-body-strong text-[#1d1d1f] mb-2">Folder Scaffolding</h4>
-              <p className="text-[14px] text-[#7a7a7a] leading-relaxed">
+              <h3 className="font-body-strong text-[#1d1d1f] mb-2">Folder Scaffolding</h3>
+              <p className="text-[14px] text-[#555555] leading-relaxed">
                 Ready-to-use repository folder structures that adhere to modern production engineering standards.
               </p>
             </Card>
