@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { VivaSimulator } from '@/components/mentor/VivaSimulator';
 import { useProject } from '@/lib/context/ProjectContext';
 import { generateUniversitySynopsisMarkdown, downloadFile } from '@/lib/export/synopsisExporter';
 
@@ -209,15 +210,21 @@ export default function MentorPage() {
           </div>
         </Card>
 
+        {/* Interactive Mock Viva Defense Simulator (Differentiator Feature) */}
+        <VivaSimulator
+          questions={review.vivaQuestions}
+          projectTitle={project.title}
+        />
+
         {/* Examiner Viva Defense Questions & Answers */}
         <Card variant="utility" className="p-8 sm:p-10">
           <div className="mb-6">
             <h2 className="text-[22px] font-semibold text-[#1d1d1f] tracking-tight mb-2 flex items-center gap-2">
               <HelpCircle className="w-6 h-6 text-[#0066cc]" />
-              Viva Defense Preparation: 5 Tough Examiner Questions
+              Viva Question Bank & Benchmark Defenses
             </h2>
-            <p className="text-[14px] text-[#7a7a7a]">
-              These are the exact conceptual and trade-off questions university evaluation panels ask.
+            <p className="text-[14px] text-[#555555]">
+              Full breakdown of conceptual questions with high-scoring model answers for evaluation panels.
             </p>
           </div>
 

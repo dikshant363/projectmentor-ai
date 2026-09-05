@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PromptWarsProjectSuiteSchema",
+  "type": "object",
+  "required": [
+    "profileAnalysis",
+    "recommendedProjects",
+    "selectedProjectIndex",
+    "technologyStack",
+    "projectBlueprint",
+    "developmentRoadmap",
+    "mentorReview",
+    "careerAlignment"
+  ],
+  "properties": {
+    "profileAnalysis": {
+      "type": "object",
+      "required": ["studentSummary", "inferredStrengths", "feasibilityVerdict"],
+      "properties": {
+        "studentSummary": { "type": "string" },
+        "inferredStrengths": { "type": "array", "items": { "type": "string" } },
+        "feasibilityVerdict": { "type": "string" }
+      }
+    },
+    "recommendedProjects": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "title", "tagline", "category", "problemStatement",
+          "targetAudience", "matchScore", "confidenceScore", "difficulty",
+          "estimatedDuration", "resumeValue", "innovationScore", "practicalityScore",
+          "matchReason", "recommendedTech", "coreFeatures"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "tagline": { "type": "string" },
+          "category": { "type": "string" },
+          "problemStatement": { "type": "string" },
+          "targetAudience": { "type": "string" },
+          "matchScore": { "type": "number", "minimum": 0, "maximum": 100 },
+          "confidenceScore": { "type": "number", "minimum": 0, "maximum": 100 },
+          "difficulty": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"] },
+          "estimatedDuration": { "type": "string" },
+          "resumeValue": { "type": "number", "minimum": 1, "maximum": 10 },
+          "innovationScore": { "type": "number", "minimum": 1, "maximum": 10 },
+          "practicalityScore": { "type": "number", "minimum": 1, "maximum": 10 },
+          "matchReason": { "type": "string" },
+          "recommendedTech": { "type": "array", "items": { "type": "string" } },
+          "coreFeatures": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "selectedProjectIndex": { "type": "integer", "default": 0 },
+    "technologyStack": { "type": "object" },
+    "projectBlueprint": { "type": "object" },
+    "developmentRoadmap": { "type": "array" },
+    "mentorReview": { "type": "object" },
+    "careerAlignment": { "type": "object" }
+  }
+}
