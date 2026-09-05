@@ -60,17 +60,19 @@ export function GlobalNav() {
         {/* Action / Project Indicator */}
         <div className="hidden md:flex items-center gap-3">
           {mounted && suite ? (
-            <Link href="/blueprint">
-              <span className="inline-flex items-center gap-1.5 text-[11px] bg-[#272729] text-[#2997ff] px-3 py-1 rounded-full border border-[#333333] hover:border-[#2997ff] transition-colors">
-                <FolderGit2 className="w-3 h-3" />
-                <span>Active: {suite.recommendedProjects[suite.selectedProjectIndex]?.title.slice(0, 20)}...</span>
-              </span>
+            <Link
+              href="/blueprint"
+              className="inline-flex items-center gap-1.5 text-[11px] bg-[#272729] text-[#2997ff] px-3.5 py-1.5 min-h-[32px] rounded-full border border-[#333333] hover:border-[#2997ff] transition-colors"
+            >
+              <FolderGit2 className="w-3 h-3" />
+              <span>Active: {suite.recommendedProjects[suite.selectedProjectIndex]?.title.slice(0, 20)}...</span>
             </Link>
           ) : (
-            <Link href="/profile">
-              <button className="bg-[#0066cc] text-white text-[12px] px-3.5 py-1 rounded-full hover:bg-[#0071e3] transition-colors font-medium btn-apple-active">
-                Start Blueprint
-              </button>
+            <Link
+              href="/profile"
+              className="inline-flex items-center justify-center bg-[#0066cc] text-white text-[12px] px-4 py-1.5 min-h-[32px] rounded-full hover:bg-[#0071e3] transition-colors font-medium btn-apple-active"
+            >
+              Start Blueprint
             </Link>
           )}
         </div>
