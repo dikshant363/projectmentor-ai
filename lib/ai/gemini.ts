@@ -1,4 +1,4 @@
-import { StudentProfile, GeneratedProjectSuite } from '../types';
+import { StudentProfile, GeneratedProjectSuite } from '../types/index';
 import { generateMockProjectSuite } from './mockDecisionEngine';
 
 export async function generateProjectSuiteWithGemini(

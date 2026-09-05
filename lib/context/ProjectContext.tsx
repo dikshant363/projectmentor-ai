@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useSyncExternalStore } from 'react';
-import { StudentProfile, GeneratedProjectSuite } from '../types';
+import { StudentProfile, GeneratedProjectSuite } from '../types/index';
 import { generateMockProjectSuite } from '../ai/mockDecisionEngine';
 import { projectStore } from './projectStore';
 

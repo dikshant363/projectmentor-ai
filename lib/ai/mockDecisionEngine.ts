@@ -1,4 +1,4 @@
-import { StudentProfile, GeneratedProjectSuite, ProjectIdea, Milestone } from '../types';
+import { StudentProfile, GeneratedProjectSuite, ProjectIdea, Milestone } from '../types/index';
 
 export function generateMockProjectSuite(profile: StudentProfile): GeneratedProjectSuite {
   const primaryDomain = profile.preferredDomains[0] || profile.interests[0] || 'Artificial Intelligence / LLMs';
