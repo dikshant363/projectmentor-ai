@@ -1,0 +1,43 @@
+=== 1. NPM RUN LINT ===
+
+> promptwar@0.1.0 lint
+> eslint
+
+Exit code: 0
+=== 2. STRICT TYPE CHECK (tsc --noEmit) ===
+Exit code: 0
+=== 3. PRODUCTION BUILD (next build) ===
+
+> promptwar@0.1.0 build
+> next build
+
+▲ Next.js 16.3.4 (Turbopack)
+✓ Running next.config.ts took 11ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 281ms
+  Running TypeScript ...
+  Finished TypeScript in 832ms ...
+  Collecting page data using 9 workers ...
+  Generating static pages using 9 workers (0/10) ...
+  Generating static pages using 9 workers (2/10) 
+  Generating static pages using 9 workers (4/10) 
+  Generating static pages using 9 workers (7/10) 
+✓ Generating static pages using 9 workers (10/10) in 159ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/generate-project
+├ ○ /blueprint
+├ ○ /mentor
+├ ○ /profile
+├ ○ /recommendations
+└ ○ /roadmap
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+Exit code: 0
